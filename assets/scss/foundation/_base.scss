@@ -1,0 +1,46 @@
+@use 'var' as *;
+@use 'mixin' as *;
+
+body {
+  position: relative;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  overflow-x: hidden;
+  word-break: break-all;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+a,
+input,
+button {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a[href*='tel'] {
+  @include pc {
+    pointer-events: none;
+    cursor: default;
+  }
+}

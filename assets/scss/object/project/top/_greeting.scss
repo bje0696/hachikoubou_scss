@@ -1,0 +1,96 @@
+@use '../../../foundation/var' as *;
+@use '../../../foundation/mixin' as *;
+
+.p-topGreeting {
+  margin-top: cs(107);
+  margin-bottom: cs(48);
+  padding-bottom: cs(190);
+  @include flexCenter(v);
+  flex-flow: column;
+  position: relative;
+
+  @include sp {
+    margin-top: csp(50);
+    margin-bottom: csp(28);
+    padding-bottom: csp(130);
+  }
+
+  &:after {
+    content: '';
+    @include absCenter(h);
+    @include wh(1px, cs(140));
+    background-color: $monoDark;
+    bottom: 0;
+
+    @include sp {
+      height: csp(100);
+    }
+  }
+
+  &_thumb {
+    margin-bottom: cs(60);
+
+    @include sp {
+      margin-bottom: csp(30);
+    }
+
+    img {
+      width: cs(304);
+      margin: 0 auto cs(21);
+
+      @include sp {
+        width: csp(200);
+        margin-bottom: csp(15);
+      }
+    }
+
+    figcaption {
+      text-align: center;
+      @include fs(18);
+
+      @include sp {
+        @include fs(15);
+      }
+
+      em {
+        font-style: normal;
+        margin-top: cs(5);
+        font-weight: bold;
+        @include fs(24);
+        display: block;
+
+        @include sp {
+          @include fs(21);
+          margin-top: csp(5);
+        }
+      }
+    }
+  }
+
+  &_centerWrapper {
+    text-align: center;
+  }
+
+  &_text {
+    text-align: center;
+    @include fs_lh(18, 1.8);
+
+    @include sp {
+      @include fs(15);
+    }
+
+    &.marker {
+      text-align: center;
+      display: inline;
+      background: linear-gradient(to bottom, transparent 50%, #eff8dc 50%);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: cs(40);
+
+      @include sp {
+        margin-bottom: csp(30);
+      }
+    }
+  }
+}

@@ -1,0 +1,265 @@
+@use 'var' as *;
+
+@mixin tegaki {
+  font-family: 'Zen Kurenaido', sans-serif;
+}
+
+@mixin italic {
+  font-family: 'Italianno', cursive;
+}
+
+@mixin ellipsis($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /* Change the line bellow to see the magic! */
+    -webkit-line-clamp: $lines;
+    overflow: hidden;
+    text-overflow: unset;
+    white-space: unset;
+  }
+}
+
+// convert size
+@function cs($size) {
+  // max-width対応
+  @return #{'min(#{calc($size / $pc) * 100}vw, #{$size}px)'};
+}
+
+@mixin ls($value) {
+  letter-spacing: calc($value / 1000) + em;
+}
+
+// convert size sp
+@function csp($size) {
+  @return calc($size / $sp * 100) + vw;
+}
+
+@function get_vw($size, $viewport: $sp) {
+  $rate: calc(100 / $viewport);
+  @return calc($rate * $size) * 1vw;
+}
+
+@mixin sp {
+  @media screen and (max-width: ($bp + px)) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: (($bp + 1) + px)) {
+    @content;
+  }
+}
+
+@mixin blockCenter($width: 100%) {
+  width: $width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin fs($size: 10) {
+  // フォントサイズレスポンシブ
+  font-size: cs($size);
+
+  @include sp {
+    font-size: get_vw($size);
+  }
+}
+
+@mixin wh($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin colorSet($color, $bgColor) {
+  color: $color;
+  background-color: $bgColor;
+}
+
+@mixin highlight($color, $bgColor) {
+  &::selection {
+    @include colorSet($color, $bgColor);
+  }
+}
+
+@mixin emptyContent {
+  &:empty {
+    @content;
+  }
+}
+
+@mixin flexCenter($direction) {
+  display: flex;
+
+  @if ($direction==v) {
+    align-items: center;
+  }
+
+  @if ($direction==h) {
+    justify-content: center;
+  }
+
+  @if ($direction==c) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@mixin transProp($prop) {
+  transition-property: $prop;
+}
+
+@mixin transition($prop, $time: $transTime) {
+  @include transProp($prop);
+  transition-duration: $time;
+}
+
+@mixin hover($opacity: 0.5) {
+  @include transition(opacity);
+  opacity: 1;
+
+  &:hover {
+    @include transition(opacity);
+    opacity: $opacity;
+
+    @include sp {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin absCenter($direction) {
+  position: absolute;
+
+  @if ($direction==v) {
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  @if ($direction==h) {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @if ($direction==c) {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+
+@mixin fullImg($width: 100%) {
+  width: $width;
+
+  img {
+    width: 100%;
+  }
+}
+
+@mixin bgImg($w: 0, $h: 0, $url: '') {
+  @include wh($w, $h);
+  background: url($url) no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+@mixin imgCenter($w: 100%, $h: 100%) {
+  @include wh($w, $h);
+  object-fit: cover;
+}
+
+@mixin arw($length, $borderWidth, $borderColor, $direction) {
+  @include wh($length, $length);
+  border-top: $borderWidth solid $borderColor;
+  border-right: $borderWidth solid $borderColor;
+
+  @if ($direction == r) {
+    transform: rotate(45deg);
+  }
+
+  @if ($direction == l) {
+    transform: rotate(-135deg);
+  }
+
+  @if ($direction == b) {
+    transform: rotate(135deg);
+  }
+
+  @if ($direction == t) {
+    transform: rotate(-45deg);
+  }
+}
+
+@mixin slickArrowReset {
+  @include absCenter(v);
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  @include colorSet(transparent, transparent);
+  padding: 0;
+  z-index: 1;
+  @include hover;
+  cursor: pointer;
+}
+
+@mixin textJustify {
+  text-align: justify;
+  text-align-last: left;
+  font-feature-settings: 'palt';
+}
+
+@mixin hideScrollBar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@mixin btnReset {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  @include colorSet(transparent, transparent);
+  border-radius: 0;
+}
+
+@mixin lh($lh) {
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+  }
+
+  &:before {
+    margin-top: calc((1 - #{$lh}) * 0.5em);
+  }
+
+  &:after {
+    margin-bottom: calc((1 - #{$lh}) * 0.5em);
+  }
+}
+
+@mixin fs_lh($fs, $lh, $noMg: false) {
+  @include fs($fs);
+  line-height: $lh;
+
+  @if ($noMg == true) {
+    @include lh($lh);
+  }
+}

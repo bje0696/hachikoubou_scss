@@ -1,0 +1,14 @@
+@use '../../foundation/var' as *;
+@use '../../foundation/mixin' as *;
+
+.c-title {
+  text-align: center;
+  @include tegaki;
+  @include fs(32);
+  margin-bottom: cs(65);
+
+  @include sp {
+    @include fs(24);
+    margin-bottom: csp(30);
+  }
+}

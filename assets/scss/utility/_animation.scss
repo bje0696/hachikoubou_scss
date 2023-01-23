@@ -1,0 +1,90 @@
+@use '../foundation/mixin' as *;
+
+// .js-animeBlock
+
+.js-animeElement {
+  @include transition(all, 0.8s);
+  opacity: 0;
+
+  &.show {
+    @include transition(all, 0.8s);
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.js-fadeUp {
+  transform: translateX(0) translateY(5%);
+}
+
+.js-fadeUp-1 {
+  transform: translateX(0) translateY(5%);
+  transition-delay: 0.3s !important;
+}
+
+.js-fadeUp-2 {
+  transform: translateX(0) translateY(5%);
+  transition-delay: 0.6s !important;
+}
+
+.js-fadeUp-3 {
+  transform: translateX(0) translateY(5%);
+  transition-delay: 0.9s !important;
+}
+
+.js-fadeDown {
+  transform: translateX(0) translateY(-5%);
+}
+
+.js-fadeDown-1 {
+  transform: translateX(0) translateY(-5%);
+  transition-delay: 0.3s !important;
+}
+
+.js-fadeDown-2 {
+  transform: translateX(0) translateY(-5%);
+  transition-delay: 0.6s !important;
+}
+
+.js-fadeDown-3 {
+  transform: translateX(0) translateY(-5%);
+  transition-delay: 0.9 !important;
+}
+
+.js-fadeToRight {
+  transform: translateX(-5%) translateY(0);
+}
+
+.js-fadeToRight-1 {
+  transform: translateX(-5%) translateY(0);
+  transition-delay: 0.3s !important;
+}
+
+.js-fadeToRight-2 {
+  transform: translateX(-5%) translateY(0);
+  transition-delay: 0.6s !important;
+}
+
+.js-fadeToRight-3 {
+  transform: translateX(-5%) translateY(0);
+  transition-delay: 0.3s !important;
+}
+
+.js-fadeToLeft {
+  transform: translateX(5%) translateY(0);
+}
+
+.js-fadeToLeft-1 {
+  transform: translateX(5%) translateY(0);
+  transition-delay: 0.3s !important;
+}
+
+.js-fadeToLeft-2 {
+  transform: translateX(5%) translateY(0);
+  transition-delay: 0.6s !important;
+}
+
+.js-fadeToLeft-3 {
+  transform: translateX(5%) translateY(0);
+  transition-delay: 0.3s !important;
+}

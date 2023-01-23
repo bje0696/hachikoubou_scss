@@ -1,0 +1,45 @@
+@use '../foundation/var' as *;
+@use '../foundation/mixin' as *;
+
+.l-header {
+  width: calc(#{cs($pc)} - #{cs(40 * 2)});
+  padding: cs(35) cs(53) 0 cs(41);
+  @include absCenter(h);
+  @include flexCenter(v);
+  justify-content: space-between;
+
+  @include sp {
+    width: calc(100% - #{csp($spd * 2)});
+    padding: csp($spd);
+  }
+
+  &_logo {
+    color: $monoLight;
+    @include fs(30);
+    @include italic;
+    @include pc {
+      @include hover;
+    }
+
+    @include sp {
+      @include fs(20);
+    }
+  }
+
+  &_sns {
+    @include flexCenter(v);
+
+    &_btn {
+      width: cs(30);
+      margin-left: cs(25);
+      @include pc {
+        @include hover;
+      }
+
+      @include sp {
+        width: csp(20);
+        margin-left: csp(10);
+      }
+    }
+  }
+}

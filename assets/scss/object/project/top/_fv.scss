@@ -1,0 +1,36 @@
+@use '../../../foundation/var' as *;
+@use '../../../foundation/mixin' as *;
+
+.p-topFv {
+  @include blockCenter(calc(100% - #{cs(40 * 2)}));
+  margin-top: cs(40);
+  height: cs(763);
+  background: url(../img/fig_fv.jpg) no-repeat top center/contain;
+  @include flexCenter(h);
+  padding-top: cs(123);
+
+  @include sp {
+    @include wh(calc(100% - #{csp($spd * 2)}), auto);
+    margin-top: csp($spd);
+    padding: csp(100) csp($spd * 2);
+    background-size: auto 100%;
+  }
+
+  span {
+    border: 1px solid $monoLight;
+    @include wh(cs(866), cs(450));
+    padding-top: cs(134);
+    @include tegaki;
+    @include fs_lh(24, 2);
+    color: $monoLight;
+    @include flexCenter(h);
+    text-align: center;
+
+    @include sp {
+      @include wh(100%, auto);
+      @include fs(14);
+      padding: csp($spd);
+      text-shadow: 0 0 4px rgba($monoDark, 0.5);
+    }
+  }
+}
